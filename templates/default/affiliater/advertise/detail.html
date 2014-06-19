@@ -1,0 +1,76 @@
+<!--{include file="common/header.html"}-->
+<meta name="loadmodule" content="Member.Login" error="login.html" />
+<meta name="loadmodule" content="Affiliate.Site.List" mode="select" select="site_id|site_name" />
+<meta name="loadmodule" content="Affiliate.Advertise.Detail" />
+<meta name="loadmodule" content="Affiliate.Site.Detail" />
+<!--{assign var="advertise" value=$attr.advertise}-->
+<!--{include file="common/affiliater_header.html"}-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!--{include file="common/affiliater_menu.html"}-->
+        <div id="content" class="span10">
+            <!-- content starts -->
+            <div>
+                <div>
+                    <ul class="breadcrumb">
+                        <li><a href="<!--{base}-->/affiliater/index.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="<!--{base}-->/affiliater/advertise/index.html">広告一覧</a> <span class="divider">/</span></li>
+                        <li>バナー取得</li>
+                    </ul>
+                </div>
+                <div class="row-fluid sortable">
+                    <div class="box span12">
+                        <div class="box-header well" data-original-title>
+                            <h2>
+                                <i class="icon-edit"></i> <!--{$advertise->advertise_name}-->バナー取得
+                            </h2>
+                        </div>
+                        <div class="box-content">
+                            <form action="detail.html" method="GET">
+                            <select name="site_id" onchange="this.form.submit();">
+                            <option value="">サイトを選択してください</option>
+                            <!--{html_options options=$attr.sites selected=$attr.site->site_id}-->
+                            </select>
+                            </form>
+                        </div>
+                        <!--{if $attr.site->site_id > 0}-->
+                        <div class="box-content">
+                            <table class="table table-bordered bootstrap-datatable">
+                                <thead>
+                                    <tr>
+                                        <th>バナー画像</th>
+                                        <th>アフィリエイトタグ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--{if $advertise->banner_image1 != ""}-->
+                                    <tr>
+                                        <td>
+                                            <img src="<!--{$advertise->banner_image1}-->" width="100" />
+                                        </td>
+                                        <td>
+                                            <textarea class="span9" cols="110" rows="4" readonly onclick="this.select()"><a href="http://<!--{$smarty.server.SERVER_NAME}--><!--{base}-->/ad/?aff=<!--{$attr.site->site_code}-->.<!--{$advertise->advertise_code}-->">
+<img src="http://<!--{$smarty.server.SERVER_NAME}--><!--{$advertise->banner_image1}-->" />
+</a></textarea>
+                                        </td>
+                                    </tr>
+                                    <!--{/if}-->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--{/if}-->
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+            </div>
+            <!-- content ends -->
+        </div>
+        <!--/#content.span10-->
+    </div>
+    <!--/fluid-row-->
+    <hr>
+    <!--{include file="common/affiliater_footer.html"}-->
+</div>
+<!--/.fluid-container-->
+<!--{include file="common/footer.html"}-->

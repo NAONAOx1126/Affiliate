@@ -1,0 +1,72 @@
+<!--{include file="common/header.html"}-->
+<meta name="loadmodule" content="Member.Login" error="login.html" />
+<meta name="loadmodule" content="Affiliate.Site.Detail" />
+<!--{assign var="site" value=$attr.site}-->
+<!--{include file="common/affiliater_header.html"}-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!--{include file="common/affiliater_menu.html"}-->
+        <div id="content" class="span10">
+            <!-- content starts -->
+            <div>
+                <div>
+                    <ul class="breadcrumb">
+                        <li><a href="<!--{base}-->/affiliater/index.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="<!--{base}-->/affiliater/site/index.html">サイト一覧</a> <span class="divider">/</span></li>
+                        <li>サイト登録／編集</li>
+                    </ul>
+                </div>
+                <div class="row-fluid sortable">
+                    <div class="box span12">
+                        <div class="box-header well" data-original-title>
+                            <h2>
+                                <i class="icon-edit"></i> サイト登録／編集
+                            </h2>
+                        </div>
+                        <div class="box-content">
+                            <form action="confirm.html" method="POST" class="form-horizontal">
+                                <input type="hidden" name="site_id" value="<!--{$site->site_id}-->" />
+                                <input type="hidden" name="customer_id" value="<!--{$attr.CUSTOMER->customer_id}-->" />
+                                <input type="hidden" name="site_code" value="<!--{$site->site_code}-->" />
+                                <fieldset>
+                                    <legend>登録サイトの情報を設定してください</legend>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">サイト名 </label>
+                                        <div class="controls">
+                                            <input type="text" class="span6" id="site_name" name="site_name" value="<!--{$site->site_name|input:"site_name"}-->" placeholder="サイト名" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">サイトURL </label>
+                                        <div class="controls">
+                                            <input type="text" class="span6" id="site_url" name="site_url" value="<!--{$site->site_url|input:"site_url"}-->" placeholder="http://" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="site_description">サイト説明</label>
+                                        <div class="controls">
+                                            <textarea class="cleditor" id="site_description" name="site_description" rows="3"><!--{$site->site_description|input:"site_description"}--></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">登録内容を確認する</button>
+                                        <a href="index.html" class="btn">一覧に戻る</a>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+            </div>
+            <!-- content ends -->
+        </div>
+        <!--/#content.span10-->
+    </div>
+    <!--/fluid-row-->
+    <hr>
+    <!--{include file="common/affiliater_footer.html"}-->
+</div>
+<!--/.fluid-container-->
+<!--{include file="common/footer.html"}-->

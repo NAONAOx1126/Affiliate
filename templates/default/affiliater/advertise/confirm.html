@@ -1,0 +1,126 @@
+<!--{include file="common/header.html"}-->
+<meta name="loadmodule" content="Member.Login" error="login.html" />
+<meta name="loadmodule" content="Upload.Image" />
+<meta name="loadmodule" content="Error.Check.Require" key="advertise_name" value="広告名" />
+<meta name="loadmodule" content="Error.Check.Require" key="advertise_url" value="ランディングページURL" />
+<meta name="loadmodule" content="Error.Check.Require" key="banner_image1" value="広告バナー１" />
+<meta name="loadmodule" content="Error.Check.Require" key="conversion_limit" value="再訪許可期間" />
+<meta name="loadmodule" content="Error.Check.Number" key="conversion_limit" value="再訪許可期間" />
+<meta name="loadmodule" content="Error.Check.Require" key="active_flg" value="広告ステータス" />
+<meta name="loadmodule" content="Error.Exception" error="affiliater/advertise/edit.html" />
+<!--{assign var="site" value=$attr.site}-->
+<!--{include file="common/affiliater_header.html"}-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!--{include file="common/affiliater_menu.html"}-->
+        <div id="content" class="span10">
+            <!-- content starts -->
+            <div>
+                <div>
+                    <ul class="breadcrumb">
+                        <li><a href="<!--{base}-->/affiliater/index.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="<!--{base}-->/affiliater/advertise/index.html">広告一覧</a> <span class="divider">/</span></li>
+                        <li>広告登録／編集</li>
+                    </ul>
+                </div>
+                <div class="row-fluid sortable">
+                    <div class="box span12">
+                        <div class="box-header well" data-original-title>
+                            <h2>
+                                <i class="icon-edit"></i> 広告登録／編集
+                            </h2>
+                        </div>
+                        <div class="box-content">
+                            <form action="complete.html" method="POST" class="form-horizontal">
+                                <fieldset>
+                                    <legend>以下の内容で登録します</legend>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">広告名 </label>
+                                        <div class="controls"><!--{$post.advertise_name}--></div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">ランディングページURL </label>
+                                        <div class="controls"><!--{$post.advertise_url}--></div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">報酬料率 </label>
+                                        <div class="controls"><!--{$post.reward_price}-->円／件<br /><!--{$post.reward_rate}-->%／売上</div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">掲載期間 </label>
+                                        <div class="controls"><!--{if $post.start_date != ""}--><!--{$post.start_date}--><!--{else}-->指定なし<!--{/if}--> 〜 <!--{if $post.end_date != ""}--><!--{$post.end_date}--><!--{else}-->無期限<!--{/if}--></div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="site_description">広告説明</label>
+                                        <div class="controls"><!--{$post.description}--></div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー１</label>
+                                        <div class="controls">
+                                            <!--{if $post.banner_image1 != ""}-->
+                                            <img src="<!--{$post.banner_image1}-->" />
+                                            <!--{/if}-->
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー２</label>
+                                        <div class="controls">
+                                            <!--{if $post.banner_image2 != ""}-->
+                                            <img src="<!--{$post.banner_image2}-->" />
+                                            <!--{/if}-->
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー３</label>
+                                        <div class="controls">
+                                            <!--{if $post.banner_image3 != ""}-->
+                                            <img src="<!--{$post.banner_image3}-->" />
+                                            <!--{/if}-->
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー４</label>
+                                        <div class="controls">
+                                            <!--{if $post.banner_image4 != ""}-->
+                                            <img src="<!--{$post.banner_image4}-->" />
+                                            <!--{/if}-->
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー５</label>
+                                        <div class="controls">
+                                            <!--{if $post.banner_image5 != ""}-->
+                                            <img src="<!--{$post.banner_image5}-->" />
+                                            <!--{/if}-->
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">再訪許可期間 </label>
+                                        <div class="controls"><!--{$post.conversion_limit}-->日</div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="active_flg">広告ステータス</label>
+                                        <div class="controls"><!--{if $post.active_flg == "1"}-->有効<!--{else}-->無効<!--{/if}--></div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" name="save" value="true" class="btn btn-primary">登録内容を確認する</button>
+                                        <a href="edit.html" class="btn">編集する</a>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+            </div>
+            <!-- content ends -->
+        </div>
+        <!--/#content.span10-->
+    </div>
+    <!--/fluid-row-->
+    <hr>
+    <!--{include file="common/affiliater_footer.html"}-->
+</div>
+<!--/.fluid-container-->
+<!--{include file="common/footer.html"}-->

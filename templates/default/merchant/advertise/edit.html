@@ -1,0 +1,194 @@
+<!--{include file="common/header.html"}-->
+<meta name="loadmodule" content="Admin.Login" error="login.html" />
+<meta name="loadmodule" content="Affiliate.Advertise.Detail" />
+<!--{assign var="advertise" value=$attr.advertise}-->
+<!--{include file="common/merchant_header.html"}-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!--{include file="common/merchant_menu.html"}-->
+        <div id="content" class="span10">
+            <!-- content starts -->
+            <div>
+                <div>
+                    <ul class="breadcrumb">
+                        <li><a href="<!--{base}-->/merchant/index.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="<!--{base}-->/merchant/advertise/index.html">広告一覧</a> <span class="divider">/</span></li>
+                        <li>広告登録／編集</li>
+                    </ul>
+                </div>
+                <div class="row-fluid sortable">
+                    <div class="box span12">
+                        <div class="box-header well" data-original-title>
+                            <h2>
+                                <i class="icon-edit"></i> 広告登録／編集
+                            </h2>
+                        </div>
+                        <!--{if is_array($ERRORS) && count($ERRORS) > 0}-->
+                        <div class="box-content alerts">
+                            <!--{foreach from=$ERRORS item="error"}-->
+                            <div class="alert alert-error">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <!--{$error}-->
+                            </div>
+                            <!--{/foreach}-->
+                        </div>
+                        <!--{/if}-->
+                        <div class="box-content">
+                            <form action="confirm.html" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                <input type="hidden" name="advertise_id" value="<!--{$advertise->advertise_id}-->" />
+                                <input type="hidden" name="company_id" value="<!--{$attr.ADMINISTRATOR->company_id}-->" />
+                                <input type="hidden" name="advertise_code" value="<!--{$advertise->advertise_code|input:"advertise_code"}-->" />
+                                <fieldset>
+                                    <legend>広告の情報を設定してください</legend>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">コンバージョンタグ </label>
+                                        <div class="controls">
+                                            <textarea class="span9" cols="110" rows="2" readonly onclick="this.select()"><img src="http://<!--{$smarty.server.SERVER_NAME}--><!--{base}-->/cv/?aff=<!--{$advertise->advertise_code}-->&oid=%ORDER%&total=%TOTAL%" width="1" height="1" /></textarea>
+                                            <ul>
+                                            <li>%ORDER%は注文を識別する番号を設定してください。</li>
+                                            <li>%TOTAL%は成果として適用する合計金額を設定してください。</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">広告名 </label>
+                                        <div class="controls">
+                                            <input type="text" class="span6" id="advertise_name" name="advertise_name" value="<!--{$advertise->advertise_name|input:"advertise_name"}-->" placeholder="広告名" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">ランディングページURL </label>
+                                        <div class="controls">
+                                            <input type="text" class="span6" id="advertise_url" name="advertise_url" value="<!--{$advertise->advertise_url|input:"advertise_url"}-->" placeholder="http://" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">報酬料率 </label>
+                                        <div class="controls">
+                                            <span class="input-append"><input type="text" class="span4" id="reward_price" name="reward_price" value="<!--{$advertise->reward_price|input:"reward_price"}-->" placeholder="0" /><span class="add-on">円／件</span></span> <span class="input-append"><input type="text" class="span3" id="reward_rate" name="reward_rate" value="<!--{$advertise->reward_rate|input:"reward_rate"}-->" placeholder="0" /><span class="add-on">%／売上</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">掲載期間 </label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium datepicker" id="start_date" name="start_date" data-date-format="yyyy-mm-dd" value="<!--{if $advertise->start_date != "0000-00-00"}--><!--{$advertise->start_date|input:"start_time"}--><!--{/if}-->">〜 <input type="text" class="input-medium datepicker" id="end_date" name="end_date" data-date-format="yyyy-mm-dd" value="<!--{if $advertise->end_date != "0000-00-00"}--><!--{$advertise->end_date|input:"end_time"}--><!--{/if}-->">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="site_description">広告説明</label>
+                                        <div class="controls">
+                                            <textarea class="cleditor" id="description" name="description" rows="3"><!--{$advertise->description|input:"description"}--></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー１</label>
+                                        <div class="controls">
+                                            <input type="hidden" name="banner_image1" value="<!--{$advertise->banner_image1}-->" />
+                                            <!--{if $advertise->banner_image1 != ""}-->
+                                            <div>
+                                                <img src="<!--{$advertise->banner_image1}-->" />
+                                            </div>
+                                            <!--{/if}-->
+                                            <div class="uploader" id="uniform-fileInput">
+                                                <input class="input-file uniform_on" id="banner_image1" name="banner_image1" type="file" size="19" style="opacity: 0;"><span class="filename">ファイルが選択されていません</span><span class="action">ファイルを選択してください</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー２</label>
+                                        <div class="controls">
+                                            <input type="hidden" name="banner_image2" value="<!--{$advertise->banner_image2}-->" />
+                                            <!--{if $advertise->banner_image2 != ""}-->
+                                            <div>
+                                                <img src="<!--{$advertise->banner_image2}-->" />
+                                            </div>
+                                            <!--{/if}-->
+                                            <div class="uploader" id="uniform-fileInput">
+                                                <input class="input-file uniform_on" id="banner_image2" name="banner_image2" type="file" size="19" style="opacity: 0;"><span class="filename">ファイルが選択されていません</span><span class="action">ファイルを選択してください</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー３</label>
+                                        <div class="controls">
+                                            <input type="hidden" name="banner_image3" value="<!--{$advertise->banner_image3}-->" />
+                                            <!--{if $advertise->banner_image3 != ""}-->
+                                            <div>
+                                                <img src="<!--{$advertise->banner_image3}-->" />
+                                            </div>
+                                            <!--{/if}-->
+                                            <div class="uploader" id="uniform-fileInput">
+                                                <input class="input-file uniform_on" id="banner_image3" name="banner_image3" type="file" size="19" style="opacity: 0;"><span class="filename">ファイルが選択されていません</span><span class="action">ファイルを選択してください</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー４</label>
+                                        <div class="controls">
+                                            <input type="hidden" name="banner_image4" value="<!--{$advertise->banner_image4}-->" />
+                                            <!--{if $advertise->banner_image4 != ""}-->
+                                            <div>
+                                                <img src="<!--{$advertise->banner_image4}-->" />
+                                            </div>
+                                            <!--{/if}-->
+                                            <div class="uploader" id="uniform-fileInput">
+                                                <input class="input-file uniform_on" id="banner_image4" name="banner_image4" type="file" size="19" style="opacity: 0;"><span class="filename">ファイルが選択されていません</span><span class="action">ファイルを選択してください</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">広告バナー５</label>
+                                        <div class="controls">
+                                            <input type="hidden" name="banner_image5" value="<!--{$advertise->banner_image5}-->" />
+                                            <!--{if $advertise->banner_image5 != ""}-->
+                                            <div>
+                                                <img src="<!--{$advertise->banner_image5}-->" />
+                                            </div>
+                                            <!--{/if}-->
+                                            <div class="uploader" id="uniform-fileInput">
+                                                <input class="input-file uniform_on" id="banner_image5" name="banner_image5" type="file" size="19" style="opacity: 0;"><span class="filename">ファイルが選択されていません</span><span class="action">ファイルを選択してください</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">再訪許可期間 </label>
+                                        <div class="controls">
+                                            <span class="input-append"><input type="text" class="span6" id="conversion_limit" name="conversion_limit" value="<!--{$advertise->conversion_limit|input:"conversion_limit"}-->" placeholder="45" /><span class="add-on">日</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="site_description">広告ステータス</label>
+                                        <div class="controls">
+                                            <label class="radio"> <input type="radio" name="active_flg" id="active_flg_1" value="1"
+
+
+                                                <!--{if $advertise->active_flg == "1"}--> checked<!--{/if}-->> 有効
+                                            </label> <label class="radio"> <input type="radio" name="active_flg" id="active_flg_0" value="0"
+
+
+                                                <!--{if $advertise->active_flg != "1"}--> checked<!--{/if}-->> 無効
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">登録内容を確認する</button>
+                                        <a href="index.html" class="btn">一覧に戻る</a>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+            </div>
+            <!-- content ends -->
+        </div>
+        <!--/#content.span10-->
+    </div>
+    <!--/fluid-row-->
+    <hr>
+    <!--{include file="common/merchant_footer.html"}-->
+</div>
+<!--/.fluid-container-->
+<!--{include file="common/footer.html"}-->

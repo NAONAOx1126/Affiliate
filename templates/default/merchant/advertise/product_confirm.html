@@ -1,0 +1,83 @@
+<!--{include file="common/header.html"}-->
+<meta name="loadmodule" content="Admin.Login" error="login.html" />
+<meta name="loadmodule" content="Upload.Image" />
+<!--{assign var="product" value=$attr.product}-->
+<!--{include file="common/merchant_header.html"}-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!--{include file="common/merchant_menu.html"}-->
+        <div id="content" class="span10">
+            <!-- content starts -->
+            <div>
+                <div>
+                    <ul class="breadcrumb">
+                        <li><a href="<!--{base}-->/merchant/index.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="<!--{base}-->/merchant/advertise/index.html">広告一覧</a> <span class="divider">/</span></li>
+                        <li><a href="<!--{base}-->/merchant/advertise/product.html">広告商品一覧</a> <span class="divider">/</span></li>
+                        <li>広告商品登録／編集</li>
+                    </ul>
+                </div>
+                <div class="row-fluid sortable">
+                    <div class="box span12">
+                        <div class="box-header well" data-original-title>
+                            <h2>
+                                <i class="icon-edit"></i> 広告商品登録／編集
+                            </h2>
+                        </div>
+                        <div class="box-content">
+                            <form action="product_complete.html" method="POST" class="form-horizontal">
+                                <fieldset>
+                                    <legend>以下の内容で登録します</legend>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">商品コード </label>
+                                        <div class="controls"><!--{$post.product_code}--></div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">商品名 </label>
+                                        <div class="controls"><!--{$post.product_name}--></div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">ランディングページURL </label>
+                                        <div class="controls"><!--{$post.product_url}--></div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="fileInput">商品画像</label>
+                                        <div class="controls">
+                                            <!--{if $post.product_image != ""}-->
+                                            <img src="<!--{$post.product_image}-->" />
+                                            <!--{/if}-->
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="site_description">商品説明</label>
+                                        <div class="controls"><!--{$post.product_description}--></div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="typeahead">価格 </label>
+                                        <div class="controls">
+                                        通常価格：<!--{$post.price|number_format}-->円<br>
+                                        販売価格：<!--{$post.sale_price|number_format}-->円
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" name="save" value="true" class="btn btn-primary">登録内容を確認する</button>
+                                        <a href="product.html" class="btn">編集する</a>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+            </div>
+            <!-- content ends -->
+        </div>
+        <!--/#content.span10-->
+    </div>
+    <!--/fluid-row-->
+    <hr>
+    <!--{include file="common/merchant_footer.html"}-->
+</div>
+<!--/.fluid-container-->
+<!--{include file="common/footer.html"}-->
