@@ -2,7 +2,7 @@
 <meta name="loadmodule" content="Member.Login" error="login.html" />
 <meta name="loadmodule" content="Affiliate.Site.List" mode="select" select="site_id|site_name" />
 <meta name="loadmodule" content="Affiliate.Site.Detail" />
-<meta name="loadmodule" content="Affiliate.Conversion.Page" />
+<meta name="loadmodule" content="Affiliate.Conversion.Page" useYm="1" />
 <!--{assign var="advertise" value=$attr.advertise}-->
 <!--{include file="common/affiliater_header.html"}-->
 <div class="container-fluid">
@@ -21,18 +21,13 @@
                     <div class="box span12">
                         <div class="box-header well" data-original-title>
                             <h2>
-                                <i class="icon-flag"></i> 成果一覧
+                                <i class="icon-flag"></i> 成果一覧（<!--{$attr.current}-->）
                             </h2>
+                            <div class="box-icon">
+                                <a data-rel="tooltip" href="index.html?ym=<!--{$attr.prevYm}-->" class="btn btn-default" title="前月"><span class="icon-step-backward"></span></a>
+                                <a data-rel="tooltip" href="index.html?ym=<!--{$attr.nextYm}-->" class="btn btn-default" title="翌月"><span class="icon-step-forward"></span></a>
+                            </div>
                         </div>
-                        <div class="box-content">
-                            <form action="index.html" method="GET">
-                            <select name="site_id" onchange="this.form.submit();">
-                            <option value="">サイトを選択してください</option>
-                            <!--{html_options options=$attr.sites selected=$attr.site->site_id}-->
-                            </select>
-                            </form>
-                        </div>
-                        <!--{if $attr.site->site_id > 0}-->
                         <div class="box-content">
                             <div id="pagination pagination-centered">
                                 <!--{$attr.conversions_pager->getPageLink()}-->
@@ -73,7 +68,6 @@
                                 <!--{$attr.conversions_pager->getPageLink()}-->
                             </div>
                         </div>
-                        <!--{/if}-->
                     </div>
                     <!--/span-->
                 </div>
