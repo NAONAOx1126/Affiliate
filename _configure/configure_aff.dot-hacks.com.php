@@ -34,4 +34,4 @@ Vizualizer_Configure::set("database", array(
 ));
 
 // 機能名
-Vizualizer_Configure::set("affiliate_conversion_charge_rate", "25");
+Vizualizer_Configure::set("affiliate_conversion_charge_rate", "0");
